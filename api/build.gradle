@@ -1,0 +1,24 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(Modules.data)
+    implementation project(Modules.domain)
+    implementation Libraries.kotlin_stdlib
+    implementation Libraries.rxkotlin
+    implementation Libraries.inject
+    implementation Libraries.timber
+    implementation Libraries.retrofit
+    implementation Libraries.moshi
+
+    implementation Libraries.room_runtime
+    kapt Libraries.room_complier
+    implementation Libraries.rxroom
+
+    implementation Libraries.timber
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

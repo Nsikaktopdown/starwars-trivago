@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">StarWars</string>
+    <string name="title_activity_film_detail"></string>
+   <string name="dummy_description">It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.</string>
+    <string name="action_settings">Settings</string>
+</resources>
