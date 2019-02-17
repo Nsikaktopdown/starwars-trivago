@@ -1,9 +1,9 @@
 # Star Wars Universe
 
-Test project from Trivago
+Coding Test from Trivago
 
 ## Getting Started
-This project was built base on the requirement from  the Zealpath invite.
+This test was built base on the requirement from the Zealpath invite.
 
 ### My Approach
 
