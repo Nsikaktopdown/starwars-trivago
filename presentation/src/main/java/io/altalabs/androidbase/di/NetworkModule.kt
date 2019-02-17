@@ -4,9 +4,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import io.altalabs.androidbase.BuildConfig
+import io.altalabs.androidbase.util.NetworkMonitor
 import io.altalabs.api.boilerplate.AppRemoteImpl
 import io.altalabs.api.boilerplate.RemoteApi
+import io.altalabs.data.boilerplate.exception.NoNetworkException
 import io.altalabs.data.boilerplate.repository.AppRemote
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -52,4 +55,15 @@ import javax.inject.Singleton
     @Provides
     @Singleton
    fun provideAppRemote(appRemoteImpl: AppRemoteImpl): AppRemote = appRemoteImpl
+
+    @Provides @Singleton
+    fun providesInternetConnectionInterceptor(networkMonitor: NetworkMonitor): Interceptor {
+        return Interceptor { chain ->
+            if (networkMonitor.isConnected()) {
+                chain.proceed(chain.request())
+            } else {
+                throw NoNetworkException()
+            }
+        }
+    }
 }

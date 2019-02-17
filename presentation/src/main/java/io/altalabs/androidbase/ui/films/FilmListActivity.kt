@@ -3,14 +3,17 @@ package io.altalabs.androidbase.ui.films
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.SearchView
+import android.view.Menu
 import io.altalabs.androidbase.*
 import io.altalabs.androidbase.di.AppViewModelFactory
 import io.altalabs.androidbase.ui.base.BaseActivity
 import io.altalabs.androidbase.ui.films.detail.FilmDetailActivity
+import io.altalabs.androidbase.ui.search.SearchActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class FilmListActivity : BaseActivity() {
+class FilmListActivity : BaseActivity(), SearchView.OnQueryTextListener {
     private val itemClick: (FilmModel) -> Unit = {
         startActivity(FilmDetailActivity.intent(this, it))
     }
@@ -31,7 +34,6 @@ class FilmListActivity : BaseActivity() {
              */
             viewModel.getFilms()
         }
-
 
         viewModel.film.observe(this, Observer { it ->
             it?.let {
@@ -59,6 +61,30 @@ class FilmListActivity : BaseActivity() {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(this@FilmListActivity, 2)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_film_detail, menu)
+
+        val searchItem = menu!!.findItem(R.id.searchBar)
+
+        val searchView = searchItem.getActionView() as SearchView
+        searchView.setQueryHint("Search Character")
+        searchView.setOnQueryTextListener(this)
+        searchView.setIconified(true)
+        return true
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+       if(query!!.isNotEmpty()){
+           startActivity(SearchActivity.intent(this, query))
+       }
+        return true
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+        return true
     }
 
 

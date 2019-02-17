@@ -1,5 +1,6 @@
 package io.altalabs.data.boilerplate.repository
 
+import io.altalabs.data.boilerplate.model.CharacterEntity
 import io.altalabs.data.boilerplate.model.FilmEntity
 import io.reactivex.Single
 
@@ -9,4 +10,5 @@ import io.reactivex.Single
  */
 interface AppRemote{
     fun getFilms(): Single<List<FilmEntity>>
+    fun search(query: String): Single<List<CharacterEntity>>
 }

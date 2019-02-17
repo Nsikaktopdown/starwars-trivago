@@ -16,16 +16,29 @@ import javax.inject.Inject
 
 class AppCacheImpl @Inject constructor(private var database: AppDatabase,
                                        private var mapper: CacheFilmMapper) : AppCache {
+    override fun getFilmWithId(id: Int): Single<FilmEntity> {
+        return database.filmDao().getFilmWithId(id).map {
+            FilmEntity(
+                    it.episode_id,
+                    it.title,
+                    it.director,
+                    it.release_date,
+                    it.opening_crawl,
+                    it.producer
+            )
+        }
+    }
+
     override fun saveFilms(list: List<FilmEntity>): Completable {
-        return  Completable.fromAction{ database.filmDao().saveFilms(mapper.mapFromData(list))}
+        return Completable.fromAction { database.filmDao().saveFilms(mapper.mapFromData(list)) }
     }
 
     override fun getFilms(): Single<List<FilmEntity>> {
-       return  database.filmDao().getFilms().map { mapper.mapFromCache(it) }
+        return database.filmDao().getFilms().map { mapper.mapFromCache(it) }
     }
 
     override fun clearFilms(): Completable {
-       return  Completable.fromAction { database.filmDao().clearFilms() }
+        return Completable.fromAction { database.filmDao().clearFilms() }
     }
 
 

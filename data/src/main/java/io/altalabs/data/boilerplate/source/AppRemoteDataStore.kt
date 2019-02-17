@@ -1,5 +1,6 @@
 package io.altalabs.data.boilerplate.source
 
+import io.altalabs.data.boilerplate.model.CharacterEntity
 import io.altalabs.data.boilerplate.model.FilmEntity
 import io.altalabs.data.boilerplate.repository.AppCache
 import io.altalabs.data.boilerplate.repository.AppDataStore
@@ -14,6 +15,14 @@ import javax.inject.Inject
  * with the remote data source
  */
 class AppRemoteDataStore @Inject constructor(private val remote: AppRemote) : AppDataStore {
+    override fun getFilmWithId(id: Int): Single<FilmEntity> {
+        throw  UnsupportedOperationException()
+    }
+
+    override fun search(query: String): Single<List<CharacterEntity>> {
+        return remote.search(query)
+    }
+
     override fun clearFilms(): Completable {
         throw  UnsupportedOperationException()
     }
@@ -27,7 +36,7 @@ class AppRemoteDataStore @Inject constructor(private val remote: AppRemote) : Ap
     }
 
     override fun fetchFilmList(): Single<List<FilmEntity>> {
-        return  remote.getFilms()
+        return remote.getFilms()
     }
 
 

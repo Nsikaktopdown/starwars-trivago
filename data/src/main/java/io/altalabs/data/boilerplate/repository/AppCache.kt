@@ -8,4 +8,5 @@ interface AppCache {
     fun saveFilms(list: List<FilmEntity>): Completable
     fun getFilms(): Single<List<FilmEntity>>
     fun clearFilms(): Completable
+    fun getFilmWithId(id: Int): Single<FilmEntity>
 }

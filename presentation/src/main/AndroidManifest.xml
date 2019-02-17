@@ -12,6 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.character.CharacterDetailsActivity"></activity>
+        <activity android:name=".ui.search.SearchActivity" />
         <activity
             android:name=".ui.films.detail.FilmDetailActivity"
             android:label="@string/title_activity_film_detail"

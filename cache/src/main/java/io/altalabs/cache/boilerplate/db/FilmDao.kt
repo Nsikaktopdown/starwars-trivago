@@ -8,7 +8,7 @@ import io.altalabs.cache.boilerplate.entity.CacheFilmEntity
 import io.reactivex.Single
 
 @Dao
-interface  FilmDao{
+interface FilmDao {
 
     @Query("SELECT * FROM starWarsFilms")
     fun getFilms(): Single<List<CacheFilmEntity>>
@@ -16,8 +16,9 @@ interface  FilmDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveFilms(list: List<CacheFilmEntity>)
 
-
     @Query("DELETE FROM starWarsFilms")
     fun clearFilms()
 
+    @Query("SELECT * FROM starWarsFilms WHERE episode_id = :id")
+    fun getFilmWithId(id: Int): Single<CacheFilmEntity>
 }
