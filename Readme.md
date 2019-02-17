@@ -1,6 +1,6 @@
 # Star Wars Universe
 
-Coding Test from Trivago
+Android Coding Test from Trivago
 
 ## Getting Started
 This test was built base on the requirement from the Zealpath invite.
@@ -8,7 +8,7 @@ This test was built base on the requirement from the Zealpath invite.
 ### My Approach
 
 I decide to use Clean Architecture pattern because this helps me have independent business logic, UI,
-data source  and making the project more readable and also easy to Unit test.
+data source and also having the module more readable and also easy to Unit test.
 
 
 ### Libraries Used
